@@ -2,6 +2,8 @@ const path = require("path");
 const swaggerJsdoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 
+const apisPath = path.join(__dirname, "../modules/**/*.docs.js").replace(/\\/g, "/");
+
 const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
@@ -63,7 +65,7 @@ const swaggerOptions = {
       },
     },
   },
-  apis: [path.join(__dirname, "../modules/**/*.docs.js")],
+  apis: [apisPath],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
@@ -77,4 +79,3 @@ const setupSwagger = (app) => {
 };
 
 module.exports = { setupSwagger, swaggerSpec };
-
