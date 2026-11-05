@@ -5,10 +5,7 @@ const { env } = require("../../config/envConfig");
 const { AppError } = require("../../utils/AppError");
 const { signToken } = require("../../utils/tokens");
 
-/**
- * @param {object} payload
- * @returns {Promise<{user: object, token: string}>} 
- */
+
 const registerUser = async (payload) => {
   const { name, email, password, phone, city, area, lat, lng } = payload;
 
@@ -37,10 +34,6 @@ const registerUser = async (payload) => {
   });
 };
 
-/**
- * @param {object} payload 
- * @returns {Promise<{user: object, doctor: object, token: string}>}
- */
 const registerDoctor = async (payload) => {
   const { name, email, phone, password, bmdcNumber, specialtyId } = payload;
 
@@ -90,10 +83,6 @@ const registerDoctor = async (payload) => {
   });
 };
 
-/**
- * @param {object} credentials
- * @returns {Promise<{token: string, user: object}>}
- */
 const login = async (credentials) => {
   const { email, password } = credentials;
 

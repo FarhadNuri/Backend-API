@@ -2,10 +2,7 @@ const { status } = require("http-status");
 const { query, withTransaction } = require("../../config/db");
 const { AppError } = require("../../utils/AppError");
 
-/**
- * @param {string} userId
- * @returns {Promise<object>}
- */
+
 const getDoctorProfile = async (userId) => {
   const doctorResult = await query(
     `SELECT d.id, u.name, u.email, u.phone, d.bmdc_number AS "bmdcNumber",
@@ -98,11 +95,6 @@ const getDoctorProfile = async (userId) => {
   };
 };
 
-/**
- * @param {string} userId 
- * @param {object} payload 
- * @returns {Promise<object>} 
- */
 const updateDoctorProfile = async (userId, payload) => {
   const { name, phone, specialtyId, degrees, experienceYears, bio } = payload;
 
@@ -187,10 +179,6 @@ const updateDoctorProfile = async (userId, payload) => {
   });
 };
 
-/**
- * @param {string} doctorId 
- * @returns {Promise<object>} 
- */
 const getPublicDoctorDetails = async (doctorId) => {
   const doctorResult = await query(
     `SELECT d.id, u.name,
