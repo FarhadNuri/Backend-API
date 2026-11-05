@@ -3,6 +3,7 @@
  * /doctors/me:
  *   get:
  *     summary: View own doctor profile, chambers, and completion status
+ *     description: Returns the authenticated doctor's profile, qualifications, all chambers (active and inactive), and profile completion status.
  *     tags:
  *       - Doctor
  *     security:
@@ -20,29 +21,29 @@
  *               message: Doctor profile fetched successfully
  *               data:
  *                 id: e47b2c9a-115f-402a-92b1-56c601e3b52a
- *                 name: Dr. Rahim Uddin
- *                 email: rahim@example.com
- *                 phone: "01712345678"
- *                 bmdcNumber: A-12345
+ *                 name: Dr. Demo Verified
+ *                 email: doctor@demo.com
+ *                 phone: "01711000001"
+ *                 bmdcNumber: A-99991
  *                 specialty:
  *                   id: 550e8400-e29b-41d4-a716-446655440000
  *                   name: Dermatologist
  *                 degrees:
  *                   - MBBS
- *                   - FCPS
+ *                   - FCPS (Dermatology)
  *                 experienceYears: 8
- *                 bio: Skin specialist with 8 years of experience.
- *                 status: PENDING
+ *                 bio: Experienced Dermatologist providing comprehensive skin care and allergy treatment.
+ *                 status: VERIFIED
  *                 chambers:
  *                   - id: a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d
- *                     name: City Care Chamber
- *                     address: GEC Circle, Chattogram
+ *                     name: Popular Diagnostic Centre, GEC
+ *                     address: O.R. Nizam Road, GEC Circle
  *                     city: Chattogram
- *                     area: GEC
+ *                     area: GEC Circle
  *                     lat: 22.3594
  *                     lng: 91.8213
- *                     phone: "01812345678"
- *                     fee: 800
+ *                     phone: "01811000001"
+ *                     fee: 1000
  *                     isActive: true
  *                     schedules:
  *                       - id: f1e2d3c4-b5a6-4978-8765-4321fedcba09
@@ -68,6 +69,7 @@
  *
  *   patch:
  *     summary: Update own doctor profile
+ *     description: Updates bio, degrees, years of experience, or specialty for the logged-in doctor. At least one field is required.
  *     tags:
  *       - Doctor
  *     security:
@@ -81,10 +83,10 @@
  *             properties:
  *               name:
  *                 type: string
- *                 example: Dr. Rahim Uddin
+ *                 example: Dr. Demo Verified
  *               phone:
  *                 type: string
- *                 example: "01712345678"
+ *                 example: "01711000001"
  *               specialtyId:
  *                 type: string
  *                 format: uuid
@@ -93,13 +95,17 @@
  *                 type: array
  *                 items:
  *                   type: string
- *                 example: ["MBBS", "FCPS"]
+ *                 example: ["MBBS", "FCPS (Dermatology)"]
  *               experienceYears:
  *                 type: integer
- *                 example: 8
+ *                 example: 9
  *               bio:
  *                 type: string
- *                 example: Skin specialist with 8 years of experience.
+ *                 example: Updated bio with expanded clinic consultation details.
+ *           example:
+ *             degrees: ["MBBS", "FCPS (Dermatology)"]
+ *             experienceYears: 9
+ *             bio: Updated bio with expanded clinic consultation details.
  *     responses:
  *       200:
  *         description: Profile updated successfully
@@ -113,16 +119,16 @@
  *               message: Profile updated successfully
  *               data:
  *                 id: e47b2c9a-115f-402a-92b1-56c601e3b52a
- *                 name: Dr. Rahim Uddin
+ *                 name: Dr. Demo Verified
  *                 specialty:
  *                   id: 550e8400-e29b-41d4-a716-446655440000
  *                   name: Dermatologist
  *                 degrees:
  *                   - MBBS
- *                   - FCPS
- *                 experienceYears: 8
- *                 bio: Skin specialist with 8 years of experience.
- *                 status: PENDING
+ *                   - FCPS (Dermatology)
+ *                 experienceYears: 9
+ *                 bio: Updated bio with expanded clinic consultation details.
+ *                 status: VERIFIED
  *       400:
  *         description: Validation failed or empty body
  *         content:
@@ -142,7 +148,7 @@
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  *       404:
- *         description: Specialty not found
+ *         description: Specialty or doctor profile not found
  *         content:
  *           application/json:
  *             schema:
@@ -157,6 +163,7 @@
  * /doctors/{id}:
  *   get:
  *     summary: View public details and active chambers of a verified doctor
+ *     description: Public endpoint returning verified doctor profile info and active visiting chambers with schedules. Only returns doctors who have been verified by an admin.
  *     tags:
  *       - Doctor
  *     parameters:
@@ -181,25 +188,25 @@
  *               message: Doctor fetched successfully
  *               data:
  *                 id: e47b2c9a-115f-402a-92b1-56c601e3b52a
- *                 name: Dr. Rahim Uddin
+ *                 name: Dr. Demo Verified
  *                 specialty:
  *                   id: 550e8400-e29b-41d4-a716-446655440000
  *                   name: Dermatologist
  *                 degrees:
  *                   - MBBS
- *                   - FCPS
+ *                   - FCPS (Dermatology)
  *                 experienceYears: 8
- *                 bio: Skin specialist with 8 years of experience.
+ *                 bio: Experienced Dermatologist providing comprehensive skin care and allergy treatment.
  *                 chambers:
  *                   - id: a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d
- *                     name: City Care Chamber
- *                     address: GEC Circle, Chattogram
- *                     area: GEC
+ *                     name: Popular Diagnostic Centre, GEC
+ *                     address: O.R. Nizam Road, GEC Circle
+ *                     area: GEC Circle
  *                     city: Chattogram
  *                     lat: 22.3594
  *                     lng: 91.8213
- *                     phone: "01812345678"
- *                     fee: 800
+ *                     phone: "01811000001"
+ *                     fee: 1000
  *                     isActive: true
  *                     schedules:
  *                       - id: f1e2d3c4-b5a6-4978-8765-4321fedcba09
@@ -219,4 +226,3 @@
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-
