@@ -3,6 +3,7 @@
  * /diseases:
  *   get:
  *     summary: Autocomplete diseases by name or aliases
+ *     description: Public endpoint for fast disease autocomplete search matching both disease names and medical/common Bengali aliases.
  *     tags:
  *       - Disease
  *     parameters:
@@ -56,6 +57,7 @@
  * /specialties:
  *   get:
  *     summary: Fetch all medical specialties
+ *     description: Public endpoint returning the list of all registered medical specialties ordered alphabetically.
  *     tags:
  *       - Disease
  *     responses:
@@ -75,4 +77,3 @@
  *                 - id: 550e8400-e29b-41d4-a716-446655440000
  *                   name: Dermatologist
  */
-

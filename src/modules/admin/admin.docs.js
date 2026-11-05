@@ -3,6 +3,7 @@
  * /admin/doctors:
  *   get:
  *     summary: List doctors filtered by approval status
+ *     description: Administrative endpoint to list doctors by their status (PENDING, VERIFIED, REJECTED), ordered newest first, with their chamber count.
  *     tags:
  *       - Admin
  *     security:
@@ -40,20 +41,20 @@
  *               message: Doctors fetched successfully
  *               data:
  *                 - id: 550e8400-e29b-41d4-a716-446655440000
- *                   name: Dr. Rahim Uddin
- *                   email: rahim@example.com
- *                   phone: "01712345678"
- *                   bmdcNumber: A-12345
+ *                   name: Dr. Demo Pending
+ *                   email: pending@demo.com
+ *                   phone: "01711000002"
+ *                   bmdcNumber: A-99992
  *                   specialty:
  *                     id: 6ba7b810-9dad-11d1-80b4-00c04fd430c8
  *                     name: Dermatologist
  *                   status: PENDING
- *                   chamberCount: 1
+ *                   chamberCount: 0
  *                   createdAt: "2026-11-04T10:00:00.000Z"
  *               meta:
  *                 page: 1
  *                 limit: 10
- *                 total: 3
+ *                 total: 1
  *       400:
  *         description: Invalid query parameters
  *         content:
@@ -75,6 +76,7 @@
  *
  *   post:
  *     summary: Add a verified doctor directly with optional chambers and schedules
+ *     description: Administrative endpoint to onboard a doctor directly with VERIFIED status and initial chambers in a single transaction.
  *     tags:
  *       - Admin
  *     security:
@@ -259,6 +261,7 @@
  * /admin/doctors/{id}/approve:
  *   patch:
  *     summary: Approve a pending doctor
+ *     description: Administrative endpoint to verify a pending doctor. Sets their status to VERIFIED so they can appear in search once they have active chambers.
  *     tags:
  *       - Admin
  *     security:
@@ -314,6 +317,7 @@
  * /admin/doctors/{id}/reject:
  *   patch:
  *     summary: Reject a doctor
+ *     description: Administrative endpoint to reject a doctor. Sets status to REJECTED, immediately hiding them from public search and doctor details.
  *     tags:
  *       - Admin
  *     security:
@@ -366,4 +370,3 @@
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-
