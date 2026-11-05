@@ -7,6 +7,7 @@ const chamberRouter = require("../modules/chamber/chamber.route");
 const doctorRouter = require("../modules/doctor/doctor.route");
 const searchRouter = require("../modules/search/search.route");
 const diseaseRouter = require("../modules/disease/disease.route");
+const adminRouter = require("../modules/admin/admin.route");
 
 const router = Router();
 
@@ -21,26 +22,13 @@ router.get("/health", (_req, res) => {
   });
 });
 
-
-// 1. /auth
 router.use("/auth", authRouter);
-
-// 2. /users
 router.use("/users", userRouter);
-
-// 3. /doctors/me/chambers
 router.use("/doctors/me/chambers", chamberRouter);
-
-// 4. /doctors
 router.use("/doctors", doctorRouter);
-
-// 5. /search
 router.use("/search", searchRouter);
-
-// 6. /diseases and /specialties
 router.use(diseaseRouter);
-
-// 7. router.use("/admin", adminRouter);
+router.use("/admin", adminRouter);
 
 
 module.exports = router;
