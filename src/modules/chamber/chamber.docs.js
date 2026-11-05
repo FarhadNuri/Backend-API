@@ -3,6 +3,7 @@
  * /doctors/me/chambers:
  *   get:
  *     summary: List all chambers with schedules for the logged-in doctor
+ *     description: Returns all visiting chambers (active and inactive) registered under the authenticated doctor account, with weekly consultation hours.
  *     tags:
  *       - Chamber
  *     security:
@@ -49,6 +50,7 @@
  *
  *   post:
  *     summary: Add a new chamber with visiting schedules
+ *     description: Registers a new visiting chamber and weekly visiting schedule slots for the authenticated doctor.
  *     tags:
  *       - Chamber
  *     security:
@@ -177,6 +179,7 @@
  * /doctors/me/chambers/{chamberId}:
  *   patch:
  *     summary: Update own chamber details (replaces all schedules if provided)
+ *     description: Modifies chamber information (fee, contact number, active status) and atomically updates visiting schedules.
  *     tags:
  *       - Chamber
  *     security:
@@ -268,6 +271,7 @@
  *
  *   delete:
  *     summary: Delete own chamber and all associated schedules
+ *     description: Deletes a visiting chamber owned by the logged-in doctor, along with all of its schedule rows.
  *     tags:
  *       - Chamber
  *     security:
@@ -310,4 +314,3 @@
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-
