@@ -3,9 +3,12 @@
  * /search/doctors:
  *   get:
  *     summary: Search verified doctors and chambers sorted by distance
- *     description: Core search feature. Resolves coordinates via GPS (lat/lng), area name, or saved user profile.
+ *     description: Core search feature. Resolves coordinates via GPS (lat/lng), area name, or saved user profile. Public endpoint that accepts an optional bearer token to use saved user coordinates.
  *     tags:
  *       - Search
+ *     security:
+ *       - {}
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: disease
@@ -25,7 +28,7 @@
  *         schema:
  *           type: string
  *         description: Case-insensitive partial match on doctor name
- *         example: Rahim
+ *         example: Demo
  *       - in: query
  *         name: lat
  *         schema:
@@ -172,4 +175,3 @@
  *             schema:
  *               $ref: '#/components/schemas/ErrorResponse'
  */
-
