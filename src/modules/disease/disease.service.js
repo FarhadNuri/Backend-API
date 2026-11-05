@@ -1,9 +1,5 @@
 const { query } = require("../../config/db");
 
-/**
- * @param {object} params 
- * @returns {Promise<Array<object>>} list of matched diseases with specialty info
- */
 const getDiseases = async ({ q, limit = 10 }) => {
   const searchTerm = `%${q.trim()}%`;
 
@@ -28,9 +24,6 @@ const getDiseases = async ({ q, limit = 10 }) => {
   }));
 };
 
-/**
- * @returns {Promise<Array<object>>} 
- */
 const getSpecialties = async () => {
   const result = await query(
     `SELECT id, name
@@ -41,10 +34,6 @@ const getSpecialties = async () => {
   return result.rows;
 };
 
-/**
- * @param {string} text 
- * @returns {Promise<object|null>}
- */
 const findDiseaseByText = async (text) => {
   if (!text || typeof text !== "string") {
     return null;
