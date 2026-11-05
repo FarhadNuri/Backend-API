@@ -1,6 +1,6 @@
 # Daktar Kothay  — Specialist Doctor & Chamber Finder API
 
-> **A fast, beginner-friendly RESTful backend API that helps patients in Bangladesh instantly discover the right medical specialists and visiting chambers near them based on disease symptoms and location.**
+> **A fast RESTful backend API that helps patients in Bangladesh instantly discover the right medical specialists and visiting chambers near them based on disease symptoms and location.**
 
 [![Node.js Version](https://img.shields.io/badge/Node.js-20%2B-brightgreen)](https://nodejs.org/)
 [![Framework](https://img.shields.io/badge/Framework-Express%205-blue)](https://expressjs.com/)
@@ -205,7 +205,6 @@ erDiagram
     }
 ```
 
----
 
 ## 7. How Search Works
 
@@ -286,7 +285,7 @@ npm start
 
 Visit **`http://localhost:5000/api-docs`** in your browser to inspect and interact with the Swagger documentation.
 
----
+
 
 ## 9. Demo Accounts & 6-Step Review Script
 
@@ -299,26 +298,8 @@ Visit **`http://localhost:5000/api-docs`** in your browser to inspect and intera
 | **Pending Doctor** | `pending@demo.com` | `Doctor@12345` | Dr. Demo Pending (Waiting for admin verification) |
 | **Patient (User)** | `user@demo.com` | `User@12345` | Has saved profile location at GEC Circle, Chattogram |
 
-### 5-Minute Review Walkthrough
-Open **`/api-docs`** and follow these 6 steps:
 
-1. **Login as Pending Doctor:**
-   - Execute `POST /api/auth/login` using dropdown example **Demo Pending Doctor** (`pending@demo.com` / `Doctor@12345`).
-   - Copy the returned `token` and click **Authorize** at the top right of Swagger.
-2. **Add a Chamber as Doctor:**
-   - Execute `POST /api/doctors/me/chambers` with chamber name, fee (e.g. `800`), and weekly visiting schedules (`SAT 17:00-21:00`).
-3. **Login as System Admin:**
-   - Authorize with **Demo Admin** (`admin@daktarkothay.com` / `Admin@12345`) via `POST /api/auth/login`.
-   - Execute `GET /api/admin/doctors?status=PENDING` to view pending registrations. Copy the pending doctor's `id`.
-4. **Approve the Doctor:**
-   - Execute `PATCH /api/admin/doctors/{id}/approve` with the copied doctor ID. The status transitions to `VERIFIED`.
-5. **Search as Patient:**
-   - Execute `GET /api/search/doctors` with `disease=skin allergy&area=GEC Circle&radius=5`.
-   - The newly approved doctor appears in the results with distance calculated and chamber schedules displayed.
-6. **View Public Doctor Profile:**
-   - Execute `GET /api/doctors/{id}` to verify the public profile, qualifications, and active chambers.
 
----
 
 ## 10. API Summary (19 Endpoints)
 
@@ -344,44 +325,8 @@ Open **`/api-docs`** and follow these 6 steps:
 | 18 | `PATCH` | `/api/admin/doctors/:id/reject` | ADMIN | Reject doctor (hides from public search) |
 | 19 | `POST` | `/api/admin/doctors` | ADMIN | Directly create a verified doctor with chambers |
 
----
 
-## 11. Deployment Guide
 
-The application is structured for instant zero-configuration deployment on **Render**, **Railway**, or **Fly.io** with managed PostgreSQL on **Neon** or **Supabase**.
-
-### 1. Database Setup (Neon or Supabase)
-1. Create a free PostgreSQL instance on [Neon.tech](https://neon.tech) or [Supabase](https://supabase.com).
-2. Copy the pooled connection string (URI).
-
-### 2. Configure Environment Variables on Host
-Add the following environment variables in your deployment dashboard:
-- `PORT` = `5000` (or host-assigned `$PORT`)
-- `NODE_ENV` = `production`
-- `DATABASE_URL` = `<your-hosted-postgres-connection-string>`
-- `DB_SSL` = `true`
-- `JWT_SECRET` = `<generate-a-secure-random-string>`
-- `JWT_EXPIRES_IN` = `7d`
-- `BCRYPT_SALT_ROUNDS` = `10`
-- `ADMIN_EMAIL` = `admin@daktarkothay.com`
-- `ADMIN_PASSWORD` = `<strong-admin-password>`
-
-### 3. Build & Start Commands
-- **Build Command:** `npm install`
-- **Start Command:** `npm run db:init && npm start`
-  *(Note: `src/db/schema.sql` uses `CREATE ... IF NOT EXISTS`, making it 100% idempotent and safe to run on every deploy).*
-
-### 4. Seed Database Once
-Run the seed script against the remote database once:
-```bash
-DATABASE_URL="<remote_url>" DB_SSL="true" npm run db:seed
-```
-
-### 5. Verify Deployment
-- Probe `https://<deployed-domain>/api/health` — should return `200 OK` with system uptime.
-- Open `https://<deployed-domain>/api-docs` — interactive Swagger UI is live with CORS enabled for cross-origin testing.
-
----
 
 ## 12. Future Improvements
 
@@ -395,6 +340,3 @@ Planned future iterations outside the current scope:
 
 ---
 
-## 13. License
-
-ISC License. Built for the Credosis Backend Engineering Track.
