@@ -287,7 +287,7 @@ Visit **`http://localhost:5000/api-docs`** in your browser to inspect and intera
 
 
 
-## 9. Demo Accounts & 6-Step Review Script
+## 9. Demo Accounts
 
 ### Pre-Seeded Accounts
 
