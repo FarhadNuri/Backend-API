@@ -23,9 +23,9 @@ In Bangladesh, finding the right specialist doctor is difficult. Patients freque
 
 ## 2. Live Links
 
-- **API Base URL:** `https://<your-deployment-host>.com/api` *(replace after deployment)*
-- **Interactive Swagger Docs:** `https://<your-deployment-host>.com/api-docs` *(interactive UI to test all 19 endpoints)*
-- **Health Check:** `https://<your-deployment-host>.com/api/health`
+- **API Base URL:** `https://daktar-kothay.vercel.app/api`
+- **Interactive Swagger Docs:** `https://daktar-kothay.vercel.app/api-docs` *(interactive UI to test all 19 endpoints)*
+- **Health Check:** `https://daktar-kothay.vercel.app/api/health`
 
 ---
 
