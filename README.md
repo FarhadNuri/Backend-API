@@ -25,6 +25,8 @@ In Bangladesh, finding the right specialist doctor is difficult. Patients freque
 
 - **API Base URL:** `https://daktar-kothay.vercel.app/api`
 - **Interactive Swagger Docs:** `https://daktar-kothay.vercel.app/api-docs` *(interactive UI to test all 19 endpoints)*
+- **Postman API Documentation:** [Daktar Kothay Postman Collection](https://documenter.getpostman.com/view/58814583/2sBYHYudBK#f320f5be-5b34-48bb-8aee-c3e78db8499d)
+- **Architecture & System Design:** [Excalidraw Diagrams](https://excalidraw.com/#json=nM3yfOWymdlxMQ-k2fSd-,sBpxFZHMdilMu-3JSvLjQQ)
 - **Health Check:** `https://daktar-kothay.vercel.app/api/health`
 
 ---
